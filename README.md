@@ -1,6 +1,8 @@
 # Triangulation by constraint Delaunay or Ear Clipping
 
 > 使用约束德劳内或者耳切进行三角剖分，返回三角化后的geojson和mesh
+> https://github.com/r3mi/poly2tri.js
+> https://github.com/Turfjs/turf/issues/241
 
 ![面数据三角化](https://github.com/bigsu/delaunay_earcut/assets/18549401/9a691fca-c45b-4023-bfd1-fb2ed9a6a2bc)
 
