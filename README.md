@@ -9,13 +9,9 @@
 
 ```
 const fs = require('fs');
-const path = require('path');
 const turf = require('@turf/turf');
-const terrain_decode = require("./11.22terrain_decode_sqlite")
 const earcut = require('earcut');
 const poly2tri = require('poly2tri');
-
-const basePath = "D:/work/mapdata/output/pg_test/de"
 
 /**
 *   turf.constrainedtin
@@ -85,12 +81,8 @@ function constrainedtin(poly, delaunay) {
 
 async function getTrianglesMesh(toDelaunay) {
     console.time("geojson")
-    let filepath = path.join(basePath, "de.geojson");
-    filepath = "D:/work/mapdata/output/pg_test/1699429536/14-26969-4552/road-14-26969-4552.geojson";
 
-    let geojson = JSON.parse(fs.readFileSync(filepath));
-
-    geojson = await terrain_decode.setGeojsonHeight(geojson);
+    let geojson = { "type": "FeatureCollection", "features": [{ "type": "Feature", "properties": {}, "geometry": { "coordinates": [[[116.38873371939997, 39.91738262404331], [116.39014334177779, 39.91501371845206], [116.39249570523612, 39.91516522068099], [116.393752693343, 39.91818830872441], [116.39140603325404, 39.917085497984544], [116.38873371939997, 39.91738262404331]], [[116.39180300058342, 39.91663216133148], [116.39234001685924, 39.916033078006876], [116.39149688558405, 39.916327526308464], [116.39105016891176, 39.91570924864908], [116.39099501033331, 39.91649121780645], [116.39180300058342, 39.91663216133148]], [[116.3898495136317, 39.91694339996246], [116.39050766634921, 39.91694339996246], [116.39050766634921, 39.91642331444925], [116.3898495136317, 39.91642331444925], [116.3898495136317, 39.91694339996246]]], "type": "Polygon" } }, { "type": "Feature", "properties": {}, "geometry": { "coordinates": [[[[116.38975976553297, 39.91880955664365], [116.39039797422987, 39.918312429709744], [116.38948054922804, 39.91793002192048], [116.39066721852299, 39.917547611995786], [116.39228268428496, 39.9181594668504], [116.39171427966471, 39.919230199691896], [116.38975976553297, 39.91880955664365]]], [[[116.39293086499055, 39.919398456187196], [116.3923724323821, 39.918824852799446], [116.39329982939267, 39.91834302224058], [116.39370868183903, 39.91905429473124], [116.39293086499055, 39.919398456187196]]]], "type": "MultiPolygon" } }] }
 
     let mesh = [];
     const geojson_triangles = {
@@ -112,8 +104,8 @@ async function getTrianglesMesh(toDelaunay) {
         }
     }));
 
-    fs.writeFileSync(path.join(basePath, 'triangles.geojson'), JSON.stringify(geojson_triangles));
-    fs.writeFileSync(path.join(basePath, 'triangles_mesh.json'), JSON.stringify(mesh));
+    fs.writeFileSync('triangles.geojson', JSON.stringify(geojson_triangles));
+    fs.writeFileSync('triangles_mesh.json', JSON.stringify(mesh));
 
     console.log('over');
     console.timeEnd("geojson")
