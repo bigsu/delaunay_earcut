@@ -16,8 +16,8 @@ const earcut = require('earcut');
 const poly2tri = require('poly2tri');
 
 /**
-*   turf.constrainedtin
-*   Function that gets a {@link Polygon} and make a tin constrained to it using Poly2tri or Earcut
+* turf.constrainedtin
+* Function that gets a {@link Polygon} and make a tin constrained to it using Poly2tri or Earcut
 * @requires [poly2tri.js]{@link http://r3mi.github.io/poly2tri.js/dist/poly2tri.js}
 * @requires  [earcut.js]{@link https://github.com/mapbox/earcut}
 * @param {Feature<(Polygon)>} poly - single Polygon Feature
@@ -38,7 +38,7 @@ function constrainedtin(poly, delaunay) {
                 var c = a.map(function (b) {
                     allCoordinates.push(b);
                     // return new poly2tri.Point(b[0], b[1], b[2])
-                    return { x: b[0], y: b[1], z: b[2] }
+                    return { x: b[0], y: b[1], z: 0 }
                 });
                 c.pop();
                 return c;
